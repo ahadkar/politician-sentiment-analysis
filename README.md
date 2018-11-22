@@ -6,9 +6,19 @@ This is a project for UIUC CS410 Text Retrieval and Analysis class.
 
 In this project we extract meaningful topics from a corpus of tweets for US politicians to create topic model. Futher we analyze the topic coverage for each politician's corpus of tweets. The tweets are then analyzed for positive/ negative/ neutral sentiment.
 
+**This project requires Python3 to run.**
+
 ## Required Python Frameworks
 
 * [Django](https://www.djangoproject.com/)
+```bash
+pip install django
+```
+
+VirtualEnv is also required to run the virtual environment. You can this install by using:
+```bash
+pip install virtualenv
+```
 
 ## Use
 
