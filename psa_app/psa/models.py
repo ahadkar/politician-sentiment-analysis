@@ -6,7 +6,6 @@ from django.db import models
 
 class Politician(models.Model):
 	
-	"""docstring for Politician"""
 	twitter_id 				= models.BigIntegerField(default=0)
 	screen_name 			= models.CharField(max_length=1000)
 	description 			= models.CharField(max_length=2000)
@@ -16,10 +15,10 @@ class Politician(models.Model):
 	latest_following_count 	= models.IntegerField(default=0)
 	latest_status_count 	= models.IntegerField(default=0)
 	tags 					= models.CharField(max_length=200, blank=True)
+		
 
 class Tweet(models.Model):
 	
-	"""docstring for Tweet"""
 	tweet_id 				= models.BigIntegerField(default=0)
 	user_id 				= models.BigIntegerField(default=0)
 	created_at 				= models.DateTimeField(auto_now_add=False, blank=True)

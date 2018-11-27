@@ -15,7 +15,7 @@ In this project we extract meaningful topics from a corpus of tweets for US poli
 pip install django
 ```
 
-VirtualEnv is also required to run the virtual environment. You can this install by using:
+VirtualEnv is also required to run the virtual environment. You can install this by using:
 ```bash
 pip install virtualenv
 ```
