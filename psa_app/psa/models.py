@@ -1,34 +1,45 @@
 # Created by Aditya Hadkar
 
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 
+
 class Politician(models.Model):
-	
-	twitter_id 				= models.BigIntegerField(default=0)
-	screen_name 			= models.CharField(max_length=1000)
-	description 			= models.CharField(max_length=2000)
-	created_at 				= models.DateTimeField(auto_now_add=False, blank=True)
-	location 				= models.CharField(max_length=1000)
-	is_verified 			= models.BooleanField(default=False)
-	latest_following_count 	= models.IntegerField(default=0)
-	latest_status_count 	= models.IntegerField(default=0)
-	tags 					= models.CharField(max_length=200, blank=True)
-		
+
+	twitter_id = models.BigIntegerField(default=0)
+	screen_name = models.CharField(max_length=1000)
+	description = models.CharField(max_length=2000)
+	created_at = models.DateTimeField(auto_now_add=False, blank=True)
+	location = models.CharField(max_length=1000)
+	is_verified = models.BooleanField(default=False)
+	latest_following_count = models.IntegerField(default=0)
+	latest_status_count = models.IntegerField(default=0)
+	tags = models.CharField(max_length=200, blank=True)
+	average_positivity_score = models.FloatField(default=0)
+
 
 class Tweet(models.Model):
 	
-	tweet_id 				= models.BigIntegerField(default=0)
-	user_id 				= models.BigIntegerField(default=0)
-	created_at 				= models.DateTimeField(auto_now_add=False, blank=True)
-	tweet_text 				= models.CharField(max_length=1000)
-	hashtag_entities		= models.CharField(max_length=1000)
-	url_entities 			= models.URLField(max_length=2000)
-	favorite_count 			= models.IntegerField(default=0)
-	retweet_count 			= models.IntegerField(default=0)
-	quoted_status_id 		= models.BigIntegerField(default=0)
-	in_reply_to_status_id	= models.BigIntegerField(default=0)
+	tweet_id = models.BigIntegerField(default=0)
+	user_id = models.BigIntegerField(default=0)
+	created_at = models.DateTimeField(auto_now_add=False, blank=True)
+	tweet_text = models.CharField(max_length=1000)
+	hashtag_entities = models.CharField(max_length=1000)
+	url_entities = models.URLField(max_length=2000)
+	favorite_count = models.IntegerField(default=0)
+	retweet_count = models.IntegerField(default=0)
+	quoted_status_id = models.BigIntegerField(default=0)
+	in_reply_to_status_id = models.BigIntegerField(default=0)
+	sentiment_score = models.FloatField(default=0.0)
+
+
+class PoliticianModelForm(ModelForm):
+	class Meta:
+		model = Politician
+		fields = ['screen_name', 'description', 'location', 'is_verified', 'latest_following_count', 'tags']
+
 
 class State(models.Model):
 	
@@ -145,6 +156,3 @@ class State(models.Model):
 		default=NotAvailable,
 	)
 
-
-
-		
