@@ -15,7 +15,7 @@ In this project we extract meaningful topics from a corpus of tweets for US poli
 pip install django
 ```
 
-VirtualEnv is also required to run the virtual environment. You can install this by using:
+* VirtualEnv is required to run the virtual environment. Install this by using:
 ```bash
 pip install virtualenv
 ```
@@ -23,7 +23,7 @@ pip install virtualenv
 ## Running the app
 
 1. Clone or download the repository files.
-2. [Download the database](https://drive.google.com/file/d/1SjLypL6uYzSoWR9cRzZLVypzbfGrnJiX/view?usp=sharing) required to run the app.
+2. [Download the database](https://drive.google.com/file/d/15ngEeo4t_0wlyY8bhK91U7EXvhsXGQ6_/view?usp=sharing) required to run the app.
 3. Navigate to the project directory **politician-sentiment-analysis** and run the following command to activate the virtual environment.
 
 ```bash
