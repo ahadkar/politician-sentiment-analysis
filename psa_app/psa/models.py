@@ -33,6 +33,31 @@ class Tweet(models.Model):
 	quoted_status_id = models.BigIntegerField(default=0)
 	in_reply_to_status_id = models.BigIntegerField(default=0)
 	sentiment_score = models.FloatField(default=0.0)
+	sentiment_polarity = models.CharField(max_length=100, default='neutral')
+
+
+class Stats(models.Model):
+
+	positive_tweet_count = models.IntegerField(default=0)
+	negative_tweet_count = models.IntegerField(default=0)
+	neutral_tweet_count = models.IntegerField(default=0)
+	gm_average_positivity_score = models.FloatField(default=0.0)
+	gm_average_negativity_score = models.FloatField(default=0.0)
+	most_positive_tweet = models.CharField(max_length=1000)
+	most_positive_tweet_id = models.BigIntegerField(default=0)
+	most_negative_tweet = models.CharField(max_length=1000)
+	most_negative_tweet_id = models.BigIntegerField(default=0)
+
+	total_tweet_count = 1048575
+
+	def positive_tweet_percentage(self):
+		return float("{0:.2f}".format(((self.positive_tweet_count / self.total_tweet_count) * 100)))
+
+	def negative_tweet_percentage(self):
+		return float("{0:.2f}".format(((self.negative_tweet_count / self.total_tweet_count) * 100)))
+
+	def neutral_tweet_percentage(self):
+		return float("{0:.2f}".format(((self.neutral_tweet_count / self.total_tweet_count) * 100)))
 
 
 class PoliticianModelForm(ModelForm):
