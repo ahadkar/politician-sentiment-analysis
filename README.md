@@ -53,5 +53,39 @@ Django version 2.1.3, using settings 'psa_app.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
-
 8. Finally, start the development server by going to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
+
+
+## Sentiment Analysis
+
+In our project, we use [VADER](https://github.com/cjhutto/vaderSentiment) to perform the sentiment analysis. VADER (Valence Aware Dictionary and Sentiment Reasoner) is a lexicon and rule-based sentiment analysis tool. It is specifically attuned to sentiments expressed in social media.
+
+In the pre-processing step, we first clean the tweets, including:
+
+1. remove stock market tickers like $GE
+2. remove old style retweet text "RT"
+3. remove URLs
+4. remove the hash # sign
+
+Then we tokenize the tweets, remove stopwords, and stem the words.
+
+After pre-processing, we use VADER to do the sentiment analysis. We retrieve the compound score, and classify tweets into different polarities like positive/negative/neutral.
+
+At last, we compute the average sentiment score for each politician. 
+
+
+
+To perform sentiment analysis on tweets from the database:
+
+1. Install nltk and VADER analyzer in command line
+
+```bash
+pip install nltk
+pip install vaderSentiment
+```
+
+2. Copy the database db.sqlite3 to directory psa_app/sentiment
+3. Run tweet_sentiment.py
+4. Run politician_average.py
+
+Then an updated database with all the sentiment information is available.
