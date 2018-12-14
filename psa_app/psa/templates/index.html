@@ -5,10 +5,64 @@ Created by Aditya Hadkar
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Howdy!</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800,900|Roboto:400,700,900" rel="stylesheet">
+        <style>
+
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                background-color: #ffffff;
+                padding: 10px;
+                grid-column-gap: 15px;
+                grid-row-gap: 20px;
+                margin-left: 100px;
+                margin-right: 100px;
+            }
+
+            .grid-item {
+                background-color: rgba(255, 255, 255, 0.8);
+                border: 1px solid lightgray;
+                padding: 20px;
+                font-size: 20px;
+                font-family: 'Roboto:700', sans-serif;
+                text-align: left;
+                max-width: 325px;
+                border-radius: 5px;
+            }
+
+            .description-style {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 12px;
+            }
+
+            .header-style {
+                font-family: 'Roboto:900', sans-serif;
+                text-align: center;
+                margin: 50px;
+            }
+
+            .body-style {
+                background-color: #ffffff;
+            }
+
+        </style>
     </head>
-    <body>
-        <h1>Howdy! I am Learning Django!</h1>
-        <a href="/about/">About Me</a>
+
+    <body class="body-style">
+
+        <h1 class="header-style">Politician Sentiment Analysis</h1>
+        <!--<a href="/about/">About Me</a>-->
+
+        <div class="grid-container">
+        {% for politician in pol_list %}
+            <div class="grid-item">
+                <a href="/tweets/ {{ politician.twitter_id }}"> @{{ politician.screen_name }} </a>
+
+                <p class="description-style"> {{ politician.description }}</p>
+
+            </div>
+        {% endfor %}
+        </div>
+
     </body>
 </html>
