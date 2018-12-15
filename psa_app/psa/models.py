@@ -64,6 +64,7 @@ class Tweet(models.Model):
 	sentiment_score = models.FloatField(default=0.0)
 	sentiment_polarity = models.CharField(max_length=100, default='neutral')
 
+
 	def polarity(self):
 
 		if float(self.sentiment_score) >= 0.05:
@@ -77,7 +78,7 @@ class Tweet(models.Model):
 
 		return "Neutral"
 
-
+  
 class Stats(models.Model):
 
 	positive_tweet_count = models.IntegerField(default=0)
