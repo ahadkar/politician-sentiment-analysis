@@ -32,7 +32,7 @@ Created by Aditya Hadkar
 
             .grid-container {
                 display: grid;
-                grid-template-columns: auto auto auto;
+                grid-template-columns: 33% 33% 33%;
                 background-color: white;
                 padding-top: 15px;
                 width: 100%;
@@ -73,7 +73,7 @@ Created by Aditya Hadkar
             .internal-grid-item-2 {
                 background-color: white;
                 width: 90%;
-                padding-top: 22px;
+                padding-top: 20px;
                 font-family: 'Roboto', sans-serif;
                 font-weight: 700;
                 font-size: 24px;
@@ -101,6 +101,7 @@ Created by Aditya Hadkar
                 border-radius: 3px;
                 color: #a7b1bb;
                 padding-bottom: 10px;
+                margin-top: -10px;
             }
 
             .internal-grid-item-5 {
@@ -176,11 +177,13 @@ Created by Aditya Hadkar
             .pagination a:first-child {
                 border-top-left-radius: 5px;
                 border-bottom-left-radius: 5px;
+                font-weight: 400;
             }
 
             .pagination a:last-child {
                 border-top-right-radius: 5px;
                 border-bottom-right-radius: 5px;
+                font-weight: 400;
             }
 
             hr {
@@ -230,13 +233,14 @@ Created by Aditya Hadkar
             .tag-style {
                 border: 1px solid #3b5998;
                 float: left;
-                {#margin-left: -2px;#}
                 margin-right: 10px;
                 margin-bottom: 5px;
-                padding: 5px;
-                border-radius: 15px;
+                margin-top: 5px;
+                padding: 5px 10px 5px 10px;
+                border-radius: 5px;
                 color: #3b5998;
                 font-size: 10px;
+                font-weight: 400;
             }
 
         </style>
@@ -318,18 +322,6 @@ Created by Aditya Hadkar
                             </div>
 
                             <div></div>
-                            {% if politician.is_location_valid %}
-
-                                <div class="internal-grid-item-3">
-                                    {{ politician.location }}
-                                </div>
-                            {% else %}
-                                <div class="internal-grid-item-3">
-                                    {{ politician.location }}
-                                </div>
-                            {% endif %}
-
-                            <div></div>
                             <div class="internal-grid-item-4">
                             {% for tag in politician.processed_tags %}
 
@@ -338,6 +330,11 @@ Created by Aditya Hadkar
                                     </div>
 
                             {% endfor %}
+                            </div>
+
+                            <div></div>
+                            <div class="internal-grid-item-3">
+                                {{ politician.location }}
                             </div>
 
                             <div></div>
