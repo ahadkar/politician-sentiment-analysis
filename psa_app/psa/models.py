@@ -19,6 +19,35 @@ class Politician(models.Model):
 	tags = models.CharField(max_length=200, blank=True)
 	average_positivity_score = models.FloatField(default=0)
 
+	def tweet_url(self):
+		return "psa/tweets?screen_name=" + self.screen_name
+
+	def paginated_tweet_url(self):
+		return "psa/tweets?screen_name=" + self.screen_name + "&page"
+
+	def processed_tags(self):
+
+		tag_list = self.tags.replace("{", "")
+		tag_list = tag_list.replace("}", "")
+
+		tag_list = tag_list.split(",")
+
+		new_tags = []
+
+		for tag in tag_list:
+			new_tags.append(tag.capitalize())
+
+		new_tags = list(set(new_tags))
+
+		return new_tags
+
+	def is_location_valid(self):
+
+		if len(self.location) > 0:
+			return True
+
+		return False
+
 
 class Tweet(models.Model):
 	
@@ -33,6 +62,57 @@ class Tweet(models.Model):
 	quoted_status_id = models.BigIntegerField(default=0)
 	in_reply_to_status_id = models.BigIntegerField(default=0)
 	sentiment_score = models.FloatField(default=0.0)
+	sentiment_polarity = models.CharField(max_length=100, default='neutral')
+
+	def polarity(self):
+
+		if float(self.sentiment_score) >= 0.05:
+			return "Positive"
+
+		elif -0.05 < float(self.sentiment_score) < 0.05:
+			return "Neutral"
+
+		elif float(self.sentiment_score) <= -0.05:
+			return "Negative"
+
+		return "Neutral"
+
+
+class Stats(models.Model):
+
+	positive_tweet_count = models.IntegerField(default=0)
+	negative_tweet_count = models.IntegerField(default=0)
+	neutral_tweet_count = models.IntegerField(default=0)
+	gm_average_positivity_score = models.FloatField(default=0.0)
+	gm_average_negativity_score = models.FloatField(default=0.0)
+	most_positive_tweet = models.CharField(max_length=1000)
+	most_positive_tweet_id = models.BigIntegerField(default=0)
+	most_negative_tweet = models.CharField(max_length=1000)
+	most_negative_tweet_id = models.BigIntegerField(default=0)
+
+	total_tweet_count = 0
+	stats_type = ""
+
+	def positive_tweet_percentage(self):
+
+		if self.total_tweet_count > 0:
+			return round(((self.positive_tweet_count / self.total_tweet_count) * 100)) #float("{0:.0f}".format()
+
+		return 0.0
+
+	def negative_tweet_percentage(self):
+
+		if self.total_tweet_count > 0:
+			return round(((self.negative_tweet_count / self.total_tweet_count) * 100)) #float("{0:.0f}".format()
+
+		return 0.0
+
+	def neutral_tweet_percentage(self):
+
+		if self.total_tweet_count > 0:
+			return int(((self.neutral_tweet_count / self.total_tweet_count) * 100)) #float("{0:.0f}".format())
+
+		return 0.0
 
 
 class PoliticianModelForm(ModelForm):

@@ -4,6 +4,7 @@ import csv, sqlite3, time
 
 db_filename = "db.sqlite3"
 
+
 def parse(filename):    
 
     SQL = """
@@ -13,9 +14,9 @@ def parse(filename):
 
     start_time = time.time()
 
-    with open(filename, 'rt') as csvfile:
+    with open(filename, 'rt') as csv_file:
 
-        csv_reader = csv.DictReader(csvfile)
+        csv_reader = csv.DictReader(csv_file)
 
         with sqlite3.connect(db_filename) as conn:
             cursor = conn.cursor()
@@ -35,12 +36,14 @@ def parse(filename):
             #print(pol_name)
         """
 
+
 def main():
     
     # The file is not included in the repository to save bandwidth
     # for source control.
     
     parse('pol_tweets.csv')
+
 
 if __name__ == '__main__':
     main()

@@ -1,48 +1,242 @@
 <!-- 
 Created by Aditya Hadkar
 -->
-
+<!DOCTYPE html>
+<html lang="en">
 <html>
+    <title>All Politicians</title>
     <head>
         <meta charset="utf-8">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800,900|Roboto:400,700,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:900" rel="stylesheet">
         <style>
+
+            .main-grid-container {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto auto;
+                justify-items: stretch;
+            }
+
+            .main-grid-item-1 {
+                text-align: left;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 900;
+                color: #3b5998;
+                padding-bottom: 6px;
+            }
 
             .grid-container {
                 display: grid;
                 grid-template-columns: auto auto auto;
-                background-color: #ffffff;
-                padding: 10px;
-                grid-column-gap: 15px;
-                grid-row-gap: 20px;
-                margin-left: 100px;
-                margin-right: 100px;
+                background-color: white;
+                padding-top: 15px;
+                width: 100%;
+                border-radius: 3px;
             }
 
             .grid-item {
-                background-color: rgba(255, 255, 255, 0.8);
-                border: 1px solid lightgray;
-                padding: 20px;
-                font-size: 20px;
-                font-family: 'Roboto:700', sans-serif;
+                background-color: rgba(255, 255, 255, 1.0);
+                border: 1px solid #e5e6eb;
+                margin: 15px;
+                padding: 0px;
                 text-align: left;
-                max-width: 325px;
-                border-radius: 5px;
+                min-width: 325px;
+                border-radius: 4px;
+                {#box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);#}
             }
 
-            .description-style {
-                font-family: 'Montserrat', sans-serif;
+            .grid-item:hover {
+                box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2);
+            }
+
+            .internal-grid-container {
+                display: grid;
+                grid-template-columns: 70px auto;
+                grid-template-rows: 70px auto;
+                background-color: white;
+                width: 100%;
+                border-radius: 3px;
+            }
+
+            .internal-grid-item-1 {
+                padding-left: 10px;
+                padding-top: 10px;
+                background-color: white;
+                border-radius: 3px;
+            }
+
+            .internal-grid-item-2 {
+                background-color: white;
+                width: 90%;
+                padding-top: 22px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 700;
+                font-size: 24px;
+                border-radius: 3px;
+            }
+
+            .internal-grid-item-3 {
+                background-color: white;
+                width: 90%;
+                padding-top: -5px;
+                padding-bottom: 10px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                border-radius: 3px;
+                color: #3b5998;
+            }
+
+            .internal-grid-item-4 {
+                background-color: white;
+                width: 90%;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 300;
                 font-size: 12px;
+                border-radius: 3px;
+                color: #a7b1bb;
+                padding-bottom: 10px;
             }
 
-            .header-style {
-                font-family: 'Roboto:900', sans-serif;
-                text-align: center;
-                margin: 50px;
+            .internal-grid-item-5 {
+                background-color: white;
+                width: 90%;
+                padding-bottom: 15px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 300;
+                font-size: 12px;
+                border-radius: 3px;
+                color: #a7b1bb;
+                min-height: 40px;
             }
 
             .body-style {
-                background-color: #ffffff;
+                background-color: white;
+            }
+
+            /* unvisited link */
+            a:link {
+                color:  #3b5998;
+                text-decoration: none;
+            }
+
+            /* visited link */
+            a:visited {
+                color:  #8b9dc3;
+            }
+
+            /* mouse over link */
+            a:hover {
+                color: #ff8b94;
+                text-decoration: underline;
+            }
+
+            /* selected link */
+            a:active {
+                color: #ff8b94;
+                text-decoration: underline;
+            }
+
+            .pagination {
+              display: inline-block;
+            }
+
+            .pagination a {
+                color: #3b5998;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                border: 1px solid #e5e6eb;
+                font-family: Roboto, sans-serif;
+                font-weight: 400;
+                font-size: 10px;
+            }
+
+            .pagination a.active {
+                background-color: #3b5998;
+                color: white;
+                border: 1px solid #3b5998;
+            }
+
+            .pagination a.disabled {
+                background-color: white;
+                color: #c0c2ce;
+                border: 1px solid #e5e6eb;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #e5e6eb;
+            }
+
+            .pagination a:first-child {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            .pagination a:last-child {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+            hr {
+                width: 100%;
+                height: 1px;
+                background-color:#e5e6eb;
+                border: 0 none;
+                margin: auto 10px 10px auto;
+            }
+
+            table#stats {
+                padding: 10px 10px 20px 0px;
+            }
+
+            table#stats th {
+                font-family: Roboto, sans-serif;
+                font-weight: 500;
+                font-size: 15px;
+                padding-right: 30px;
+                padding-left: 20px;
+            }
+
+            table#stats td {
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 35px;
+                color: #8b9dc3;
+                padding-left: 20px;
+            }
+
+            table#stats td:nth-child(3) {
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 35px;
+                color: #00b159;
+                padding-left: 20px;
+            }
+
+            table#stats td:nth-child(4) {
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 35px;
+                color: #d11141;
+                padding-left: 20px;
+            }
+
+            .tag-style {
+                border: 1px solid #3b5998;
+                float: left;
+                {#margin-left: -2px;#}
+                margin-right: 10px;
+                margin-bottom: 5px;
+                padding: 5px;
+                border-radius: 15px;
+                color: #3b5998;
+                font-size: 10px;
             }
 
         </style>
@@ -50,18 +244,111 @@ Created by Aditya Hadkar
 
     <body class="body-style">
 
-        <h1 class="header-style">Politician Sentiment Analysis</h1>
-        <!--<a href="/about/">About Me</a>-->
+        <div class="main-grid-container">
 
-        <div class="grid-container">
-        {% for politician in pol_list %}
-            <div class="grid-item">
-                <a href="/tweets/ {{ politician.twitter_id }}"> @{{ politician.screen_name }} </a>
+            <div class="main-grid-item-1">
+                <h1 style="padding-left: 20px">Politician Sentiment Analysis</h1>
 
-                <p class="description-style"> {{ politician.description }}</p>
+                <hr>
 
+                <table id="stats">
+                    <thead>
+                        <tr>
+                            <th>Politicians</th>
+                            <th>Tweets Analyzed</th>
+                            <th>Positive Tweets</th>
+                            <th>Negative Tweets</th>
+                            <th>Neutral Tweets</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>668</td>
+                        <td>1,048,575</td>
+                        <td>{{ stat.positive_tweet_percentage }}<sup style="font-size: 20px">%</sup></td>
+                        <td>{{ stat.negative_tweet_percentage }}<sup style="font-size: 20px">%</sup></td>
+                        <td>{{ stat.neutral_tweet_percentage }}<sup style="font-size: 20px">%</sup></td>
+                    </tr>
+                </table>
+
+                <hr>
+
+                {% if pol_list.has_other_pages %}
+                    <div class="pagination" style="padding-left: 20px">
+
+                        {% if pol_list.has_previous %}
+                            <a href="?page={{ pol_list.previous_page_number }}">Previous</a>
+                        {% else %}
+                            <a class="disabled">Previous</a>
+                        {% endif %}
+
+                        {% for i in pol_list.paginator.page_range %}
+                            {% if pol_list.number == i %}
+                                <a href="?page={{ i }}" class="active">{{ i }}</a>
+                            {% else %}
+                                <a href="?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if pol_list.has_next %}
+                            <a href="?page={{ pol_list.next_page_number }}">Next</a>
+                        {% else %}
+                            <a class="disabled">Next</a>
+                        {% endif %}
+
+                    </div>
+                {% endif %}
             </div>
-        {% endfor %}
+
+            <hr>
+
+            <div class="grid-container">
+                {% for politician in pol_list %}
+
+                    <div class="grid-item">
+                        <div class="internal-grid-container">
+                            <div class="internal-grid-item-1">
+                                <svg height="100" width="100">
+                                    <circle cx="26" cy="26" r="20" stroke="#3b5998" stroke-width="1" fill="#f7f7f7" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <div class="internal-grid-item-2">
+                                <a href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ pol_list.number }}&sort_order={{ sort_order }}" target="_blank">
+                                {{ politician.screen_name }}
+                                </a>
+                            </div>
+
+                            <div></div>
+                            {% if politician.is_location_valid %}
+
+                                <div class="internal-grid-item-3">
+                                    {{ politician.location }}
+                                </div>
+                            {% else %}
+                                <div class="internal-grid-item-3">
+                                    {{ politician.location }}
+                                </div>
+                            {% endif %}
+
+                            <div></div>
+                            <div class="internal-grid-item-4">
+                            {% for tag in politician.processed_tags %}
+
+                                    <div class="tag-style">
+                                    {{ tag }}
+                                    </div>
+
+                            {% endfor %}
+                            </div>
+
+                            <div></div>
+                            <div class="internal-grid-item-5">
+                                {{ politician.description }}
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
     </body>
