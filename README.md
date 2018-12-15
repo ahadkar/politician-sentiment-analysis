@@ -1,4 +1,4 @@
-# politician-sentiment-analysis
+# Politician Sentiment Analysis
 
 ## Summary
 
