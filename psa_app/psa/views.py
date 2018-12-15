@@ -3,11 +3,17 @@
 
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.http import Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from .models import Politician
 from .models import Tweet
+from .models import Stats
+
+from psa import tweet_analyzer
 
 # Create your views here.
+
+tweet_sort_order = ''
 
 
 class HomePageView(TemplateView):
@@ -21,27 +27,103 @@ class AboutPageView(TemplateView):
 
 def politician_list(request):
 
-    pol_list = Politician.objects.order_by('latest_following_count')
+    all_politicians = Politician.objects.order_by('screen_name')
+
+    stat = Stats.objects.first()
+    stat.total_tweet_count = 1048575
+
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(all_politicians, 30)
+
+    try:
+        politicians = paginator.page(page)
+    except PageNotAnInteger:
+        politicians = paginator.page(1)
+    except EmptyPage:
+        politicians = paginator.page(paginator.num_pages)
+
+    global tweet_sort_order
+
+    tweet_sort_order = 'created_at'
 
     context = {
-        "pol_list": pol_list,
+        'pol_list': politicians,
+        'stat': stat,
+        'sort_order': tweet_sort_order,
     }
+
+    # tweet_analyzer.calculate()
 
     return render(request, 'index.html', context)
 
 
-def politician_tweet_list(request, twitter_id):
+def pol_tweets(request):
+
+    screen_name = request.GET.get('screen_name')
+
+    politician = Politician.objects.get(screen_name=screen_name)
+
+    global tweet_sort_order
+
+    tweet_sort_order = request.GET.get('sort_order')
+
+    if len(tweet_sort_order) == 0:
+        tweet_sort_order = 'created_at'
+
+    all_tweets = Tweet.objects.filter(user_id=politician.twitter_id).order_by(tweet_sort_order)
+
+    stat = Stats.objects.create()
+
+    most_positive_tweet_score = 0.0
+    most_positive_tweet_id = 0
+
+    most_negative_tweet_score = -0.05
+    most_negative_tweet_id = 0
+
+    for tweet in all_tweets.iterator():
+
+        stat.total_tweet_count += 1
+
+        if tweet.polarity() == "Positive":
+            stat.positive_tweet_count += 1
+
+            if float(tweet.sentiment_score) > most_positive_tweet_score:
+                most_positive_tweet_score = float(tweet.sentiment_score)
+                most_positive_tweet_id = tweet.tweet_id
+
+        elif tweet.polarity() == "Negative":
+            stat.negative_tweet_count += 1
+
+        elif tweet.polarity() == "Neutral":
+            stat.neutral_tweet_count += 1
+
+            if float(tweet.sentiment_score) < most_negative_tweet_score:
+                most_negative_tweet_score = tweet.sentiment_score
+                most_negative_tweet_id = tweet.tweet_id
+
+    positive_tweet = all_tweets.filter(tweet_id=most_positive_tweet_id)
+    negative_tweet = all_tweets.filter(tweet_id=most_negative_tweet_id)
+
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(all_tweets, 75)
 
     try:
-        tweet_list = Tweet.objects.get(twitter_id)
-    except Tweet.DoesNotExist:
-        raise Http404("Tweets don't exist for this user.")
+        tweets = paginator.page(page)
+    except PageNotAnInteger:
+        tweets = paginator.page(1)
+    except EmptyPage:
+        tweets = paginator.page(paginator.num_pages)
 
-    context = {'politician_tweet_list': tweet_list}
+    context = {
+        'testData': 'Hello: ' + screen_name,
+        'politician': politician,
+        'tweets': tweets,
+        'positive_tweet': positive_tweet,
+        'negative_tweet': negative_tweet,
+        'stat': stat,
+        'sort_order': tweet_sort_order
+    }
 
-    '''
-    Follow from here:
-    https://docs.djangoproject.com/en/2.1/intro/tutorial03/
-    '''
-
-    return render(request, 'tweets/index.html', context)
+    return render(request, 'tweets.html', context)

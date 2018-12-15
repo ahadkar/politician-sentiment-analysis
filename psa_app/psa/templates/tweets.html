@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<title>Tweets - {{ politician.screen_name }}</title>
+    <head>
+        <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:900" rel="stylesheet">
+        <style>
+
+            .main-grid-container {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto auto;
+                justify-items: stretch;
+            }
+
+            .main-grid-item-1 {
+                text-align: left;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 900;
+                color: #3b5998;
+                padding-bottom: 6px;
+            }
+
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                background-color: white;
+                padding-top: 15px;
+                width: 100%;
+                border-radius: 3px;
+            }
+
+            .grid-item {
+                background-color: rgba(255, 255, 255, 1.0);
+                border: 1px solid #e5e6eb;
+                margin: 15px;
+                padding: 0px;
+                text-align: left;
+                min-width: 325px;
+                border-radius: 4px;
+                {#box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);#}
+            }
+
+            .grid-item:hover {
+                box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2);
+            }
+
+            .internal-grid-container {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto;
+                background-color: white;
+                width: 100%;
+                border-radius: 3px;
+            }
+
+            .pagination {
+              display: inline-block;
+            }
+
+            .pagination a {
+                color: #3b5998;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                border: 1px solid #e5e6eb;
+                font-family: Roboto, sans-serif;
+                font-weight: 400;
+                font-size: 10px;
+            }
+
+            .pagination a.active {
+                background-color: #3b5998;
+                color: white;
+                border: 1px solid #3b5998;
+            }
+
+            .pagination a.disabled {
+                background-color: white;
+                color: #c0c2ce;
+                border: 1px solid #e5e6eb;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #e5e6eb;
+            }
+
+            .pagination a:first-child {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            .pagination a:last-child {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+            hr {
+                width: 100%;
+                height: 1px;
+                background-color:#e5e6eb;
+                border: 0 none;
+                margin: auto 10px 10px auto;
+            }
+
+            table#stats {
+                padding: 10px 10px 20px 0px;
+            }
+
+            table#stats th {
+                font-family: Roboto, sans-serif;
+                font-weight: 500;
+                font-size: 15px;
+                padding-right: 30px;
+                padding-left: 20px;
+            }
+
+            table#stats td {
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 35px;
+                color: #8b9dc3;
+                padding-left: 20px;
+            }
+
+            table#stats td:nth-child(3) {
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 35px;
+                color: #00b159;
+                padding-left: 20px;
+            }
+
+            table#stats td:nth-child(4) {
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 35px;
+                color: #d11141;
+                padding-left: 20px;
+            }
+
+            .indicator {
+                display: grid;
+                grid-template-columns: 100px 100px;
+                margin: 15px;
+            }
+
+            .indicator div {
+                color: white;
+                padding: 8px 16px;
+                text-decoration: none;
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 18px;
+                text-align: center;
+            }
+
+            .indicator div.positive {
+                background-color: #00b159;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                border: 1px solid #00b159;
+            }
+
+            .indicator div.positive_score {
+                color: #00b159;
+                background-color: white;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                border: 1px solid #00b159;
+            }
+
+            .indicator div.negative {
+                background-color: #d11141;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                border: 1px solid #d11141;
+            }
+
+            .indicator div.negative_score {
+                color: #d11141;
+                background-color: white;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                border: 1px solid #d11141;
+            }
+
+            .indicator div.neutral {
+                background-color: #8b9dc3;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                border: 1px solid #8b9dc3;
+            }
+
+            .indicator div.neutral_score {
+                color: #8b9dc3;
+                background-color: white;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                border: 1px solid #8b9dc3;
+            }
+
+            .tweet-style {
+                font-family: Roboto, sans-serif;
+                font-weight: 400;
+                font-size: 15px;
+                margin: 15px;
+                color: #3b5998;
+                min-height: 55px;
+            }
+
+            .tweet-subtitle-style {
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 12px;
+                margin: 15px;
+                color: #3b5998;
+            }
+
+            .sorter {
+                display: inline-block;
+            }
+
+            .sorter a {
+                color: #3b5998;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                border: 1px solid #e5e6eb;
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 10px;
+                margin-bottom: 5px;
+            }
+
+            .sorter a:first-child {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            .sorter a:last-child {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+            .sorter a.active {
+                background-color: #3b5998;
+                color: white;
+                border: 1px solid #3b5998;
+            }
+
+            .sorter a:hover:not(.active) {
+                background-color: #e5e6eb;
+            }
+
+            .sort-grid-container a {
+                font-size: 15px;
+                color: #3b5998;
+                display: grid;
+                grid-template-columns: auto;
+            }
+
+            .sort-title {
+                font-family: Roboto, sans-serif;
+                font-weight: 400;
+                font-size: 15px;
+                color: #3b5998;
+                margin: 10px 20px 10px 20px;
+            }
+
+            .tag-style {
+                border: 1px solid #3b5998;
+                float: left;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                padding: 5px 10px 5px 10px;
+                border-radius: 15px;
+                color: #3b5998;
+                font-size: 10px;
+                font-family: Roboto, sans-serif;
+                font-size: 15px;
+                font-weight: 300;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div class="main-grid-container">
+
+            <div class="main-grid-item-1">
+
+                <h1 style="padding-left: 20px">{{ politician.screen_name }}</h1>
+
+                <div style="padding-left: 20px; margin-top: -10px; font-family: Roboto, sans-serif; font-size: 15px; font-weight: 400">
+                    {{ politician.description }}
+                </div>
+
+                <div style="padding-left: 20px;  font-family: Roboto, sans-serif; font-size: 15px; font-weight: 400;">
+                    {{ politician.location }}
+                </div>
+
+                <div style="padding-top: 10px; margin-left: 20px">
+                    {% for tag in politician.processed_tags %}
+
+                            <div class="tag-style">
+                                {{ tag }}
+                            </div>
+
+                    {% endfor %}
+                </div>
+
+                <hr>
+
+                <table id="stats">
+                    <thead>
+                        <tr>
+                            <th>Tweets Analyzed</th>
+                            <th>Positive Tweets</th>
+                            <th>Negative Tweets</th>
+                            <th>Neutral Tweets</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>{{ stat.total_tweet_count }}</td>
+                        <td>{{ stat.positive_tweet_percentage }}<sup style="font-size: 20px">%</sup></td>
+                        <td>{{ stat.negative_tweet_percentage }}<sup style="font-size: 20px">%</sup></td>
+                        <td>{{ stat.neutral_tweet_percentage }}<sup style="font-size: 20px">%</sup></td>
+                    </tr>
+                </table>
+
+                <hr>
+
+                <div class="sort-grid-container">
+                    <div class="sort-title">
+                        Order By:
+                    </div>
+                    <div class="sorter">
+
+                        {% if sort_order == 'created_at' %}
+                            <a class="active" style="margin-left: 20px">Date - Oldest First</a>
+                        {% else %}
+                            <a class="disabled" style="margin-left: 20px" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=created_at">Date - Oldest First</a>
+                        {% endif %}
+
+                        {% if sort_order == '-created_at' %}
+                            <a class="active">Date - Latest First</a>
+                        {% else %}
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=-created_at">Date - Latest First</a>
+                        {% endif %}
+
+                        {% if sort_order == '-sentiment_score' %}
+                            <a class="active">Most Positive</a>
+                        {% else %}
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=-sentiment_score">Most Positive</a>
+                        {% endif %}
+
+                        {% if sort_order == 'sentiment_score' %}
+                            <a class="active">Most Negative</a>
+                        {% else %}
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=sentiment_score">Most Negative</a>
+                        {% endif %}
+
+                        {% if sort_order == 'favorite_count' %}
+                            <a class="active">Favorite Count</a>
+                        {% else %}
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=favorite_count">Favorite Count</a>
+                        {% endif %}
+
+                        {% if sort_order == 'retweet_count' %}
+                            <a class="active">Retweets</a>
+                        {% else %}
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=retweet_count">Retweets</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <hr>
+
+                {% if tweets.has_other_pages %}
+                    <div class="pagination" style="padding-left: 20px;">
+
+                        {% if tweets.has_previous %}
+                            <a href="{% url 'tweets' %}?screen_name={{ politician.screen_name }}&page={{ tweets.previous_page_number }}&sort_order={{ sort_order }}">Previous</a>
+                        {% else %}
+                            <a class="disabled">Previous</a>
+                        {% endif %}
+
+                        {% for i in tweets.paginator.page_range %}
+                            {% if tweets.number == i %}
+                                <a href="{% url 'tweets' %}?screen_name={{ politician.screen_name }}&page={{ i }}&sort_order={{ sort_order }}" class="active">{{ i }}</a>
+                            {% else %}
+                                <a href="{% url 'tweets' %}?screen_name={{ politician.screen_name }}&page={{ i }}&sort_order={{ sort_order }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if tweets.has_next %}
+                            <a href="{% url 'tweets' %}?screen_name={{ politician.screen_name }}&page={{ tweets.next_page_number }}&sort_order={{ sort_order }}">Next</a>
+                        {% else %}
+                            <a class="disabled">Next</a>
+                        {% endif %}
+
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="grid-container">
+            {% for tweet in tweets %}
+                <div class="grid-item">
+                    <div class="internal-grid-container">
+
+                        <div class="indicator">
+
+                            {% if tweet.polarity == "Positive" %}
+
+                                <div class="positive">{{ tweet.polarity }}</div>
+                                <div class="positive_score">{{ tweet.sentiment_score }}</div>
+
+                            {% elif tweet.polarity == "Neutral" %}
+
+                                <div class="neutral">{{ tweet.polarity }}</div>
+                                <div class="neutral_score">{{ tweet.sentiment_score }}</div>
+
+                            {% elif tweet.polarity == "Negative" %}
+
+                                <div class="negative">{{ tweet.polarity }}</div>
+                                <div class="negative_score">{{ tweet.sentiment_score }}</div>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="tweet-style">
+                           {{ tweet.tweet_text }}
+                        </div>
+
+                        <div class="tweet-subtitle-style">
+                            {{ tweet.created_at }}
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
