@@ -248,7 +248,7 @@ Created by Aditya Hadkar
                 margin-right: 10px;
                 text-align: center;
                 font-weight: 500;
-
+                font-size: 10px;
             }
 
             table#topics {
@@ -264,11 +264,6 @@ Created by Aditya Hadkar
                 display: grid;
                 grid-template-columns: auto auto;
                 padding-top: 10px;
-            }
-
-            .topic-grid-item-title {
-                border: 1px solid #3b5998;
-
             }
 
         </style>
@@ -308,80 +303,32 @@ Created by Aditya Hadkar
                     <thead>
                         <tr>
                             <th>Topic Distribution 1</th>
-                            <th style="padding-left: 20px">Topic Distribution 2</th>
-                            <th style="padding-left: 20px">Topic Distribution 3</th>
-                            <th style="padding-left: 20px">Topic Distribution 4</th>
-                            <th style="padding-left: 20px">Topic Distribution 5</th>
+                            <th>Topic Distribution 2</th>
+                            <th>Topic Distribution 3</th>
+                            <th>Topic Distribution 4</th>
+                            <th>Topic Distribution 5</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <tr>
-                            <td>
-                                <div class="topic-grid-container">
-                                    <div class="tag-style topic-style">
-                                        Item 1
+
+                            {% for topic in topics %}
+
+                                <td>
+                                    <div class="topic-grid-container">
+
+                                        {% for distribution in topic.topic_distribution %}
+
+                                            <div class="tag-style topic-style">
+                                                {{ distribution }}
+                                            </div>
+
+                                        {% endfor %}
                                     </div>
-                                    <div class="tag-style topic-style">
-                                        Item 2 long
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 3
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="topic-grid-container" style="margin-left: 20px">
-                                    <div class="tag-style topic-style">
-                                        Item 1
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 2 long
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 3
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="topic-grid-container" style="margin-left: 20px">
-                                    <div class="tag-style topic-style">
-                                        Item 1
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 2 long
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 3
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="topic-grid-container" style="margin-left: 20px">
-                                    <div class="tag-style topic-style">
-                                        Item 1
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 2 long
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 3
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="topic-grid-container" style="margin-left: 20px">
-                                    <div class="tag-style topic-style">
-                                        Item 1
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 2 long
-                                    </div>
-                                    <div class="tag-style topic-style">
-                                        Item 3
-                                    </div>
-                                </div>
-                            </td>
+                                </td>
+
+                            {% endfor %}
+
                         </tr>
                     </tbody>
 

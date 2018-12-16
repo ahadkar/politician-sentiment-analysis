@@ -8,6 +8,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Politician
 from .models import Tweet
 from .models import Stats
+from .models import Topics
+from .models import TweetTopic
 
 from psa import tweet_analyzer
 
@@ -47,13 +49,20 @@ def politician_list(request):
 
     tweet_sort_order = 'created_at'
 
+    topics = Topics.objects.all()
+
     context = {
         'pol_list': politicians,
         'stat': stat,
         'sort_order': tweet_sort_order,
+        'topics': topics
     }
 
-    # tweet_analyzer.calculate()
+    # tweet_analyzer.clean_up_tweet_topics()
+
+    # tweet_analyzer.analyze_stats()
+
+    # tweet_analyzer.analyze_topics()
 
     return render(request, 'index.html', context)
 
@@ -107,7 +116,9 @@ def pol_tweets(request):
 
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(all_tweets, 75)
+    paginator = Paginator(all_tweets, 30)
+
+    topics = Topics.objects.all()
 
     try:
         tweets = paginator.page(page)
@@ -123,7 +134,8 @@ def pol_tweets(request):
         'positive_tweet': positive_tweet,
         'negative_tweet': negative_tweet,
         'stat': stat,
-        'sort_order': tweet_sort_order
+        'sort_order': tweet_sort_order,
+        'topics': topics
     }
 
     return render(request, 'tweets.html', context)
