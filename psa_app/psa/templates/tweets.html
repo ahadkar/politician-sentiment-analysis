@@ -288,6 +288,29 @@
                 font-weight: 300;
             }
 
+            .topic-style {
+                margin-top: 5px;
+                margin-right: 10px;
+                text-align: center;
+                font-weight: 500;
+                font-size: 10px;
+            }
+
+            table#topics {
+                padding: 10px 10px 20px 0px;
+                margin-left: 20px;
+            }
+
+            table#topics th {
+                font-weight: 500;
+            }
+
+            .topic-grid-container {
+                display: grid;
+                grid-template-columns: auto auto;
+                padding-top: 10px;
+            }
+
         </style>
     </head>
     <body>
@@ -333,6 +356,91 @@
                         <td>{{ stat.negative_tweet_percentage }}<sup style="font-size: 20px">%</sup></td>
                         <td>{{ stat.neutral_tweet_percentage }}<sup style="font-size: 20px">%</sup></td>
                     </tr>
+                </table>
+
+                <hr>
+
+                <table id="topics">
+                    <thead>
+                        <tr>
+                            <th>Topic Distribution 1</th>
+                            <th style="padding-left: 20px">Topic Distribution 2</th>
+                            <th style="padding-left: 20px">Topic Distribution 3</th>
+                            <th style="padding-left: 20px">Topic Distribution 4</th>
+                            <th style="padding-left: 20px">Topic Distribution 5</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="topic-grid-container">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="topic-grid-container" style="margin-left: 20px">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="topic-grid-container" style="margin-left: 20px">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="topic-grid-container" style="margin-left: 20px">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="topic-grid-container" style="margin-left: 20px">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+
                 </table>
 
                 <hr>
