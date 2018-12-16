@@ -367,16 +367,16 @@
                             <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=sentiment_score">Most Negative</a>
                         {% endif %}
 
-                        {% if sort_order == 'favorite_count' %}
-                            <a class="active">Favorite Count</a>
+                        {% if sort_order == '-favorite_count' %}
+                            <a class="active">Top Favorite</a>
                         {% else %}
-                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=favorite_count">Favorite Count</a>
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=-favorite_count">Top Favorites</a>
                         {% endif %}
 
-                        {% if sort_order == 'retweet_count' %}
-                            <a class="active">Retweets</a>
+                        {% if sort_order == '-retweet_count' %}
+                            <a class="active">Top Retweets</a>
                         {% else %}
-                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=retweet_count">Retweets</a>
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=-retweet_count">Top Retweets</a>
                         {% endif %}
 
                     </div>
@@ -446,7 +446,7 @@
                         </div>
 
                         <div class="tweet-subtitle-style">
-                            {{ tweet.created_at }}
+                            {{ tweet.created_at }} • {{ tweet.retweet_count }} Retweets • {{ tweet.favorite_count }} Favorites
                         </div>
 
                     </div>
