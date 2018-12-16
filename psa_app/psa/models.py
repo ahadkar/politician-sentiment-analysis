@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.forms import ModelForm
+from django.db.models import Max
 
 # Create your models here.
 
@@ -63,7 +64,7 @@ class Tweet(models.Model):
 	in_reply_to_status_id = models.BigIntegerField(default=0)
 	sentiment_score = models.FloatField(default=0.0)
 	sentiment_polarity = models.CharField(max_length=100, default='neutral')
-
+	topics = models.CharField(max_length=100000, default='unknown')
 
 	def polarity(self):
 
@@ -78,7 +79,47 @@ class Tweet(models.Model):
 
 		return "Neutral"
 
-  
+	def top_topic(self):
+
+		tweet_topic = TweetTopic.objects.filter(tweet_id=self.tweet_id).order_by('-topic_coverage')[0]
+
+		tweet_topic.topic_id += 1
+		tweet_topic.topic_coverage = round(tweet_topic.topic_coverage * 100)
+
+		return tweet_topic
+
+	def sentiment_score_percentage(self):
+
+		return round(self.sentiment_score * 100)
+
+
+class Topics(models.Model):
+
+	topics = models.CharField(max_length=100000, default='')
+	topic_id = models.IntegerField(default=0)
+
+	def topic_distribution(self):
+		split_topics = self.topics.split(" + ")
+
+		processed_topics = []
+
+		for sp_topic in split_topics:
+			sp_topic.replace("\"", "")
+			sp_topic.replace("*", "-")
+
+			processed_topics.append(sp_topic)
+
+		return processed_topics
+
+
+class TweetTopic(models.Model):
+
+	topic_id = models.IntegerField(default=0)
+	topic_coverage = models.FloatField(default=0.0)
+	tweet_id = models.BigIntegerField(default=0)
+	user_id = models.BigIntegerField(default=0)
+
+
 class Stats(models.Model):
 
 	positive_tweet_count = models.IntegerField(default=0)
