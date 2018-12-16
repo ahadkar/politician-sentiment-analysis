@@ -100,9 +100,10 @@ We also stem words using WordNetLemmatizer from nltk.stem.wordnet.
 
 An optimization: At first we used Porter stemmer. But it stems word too much that VADER analyzer cannot recognize the word. For Example, it stems "happy" to "happi", and VADER gives 0 score for this word. It means it is neutral, which apparently is not accurate. After some research, we choose WordNet Lemmatizer as the stemmer, and it performed much better.
 
-After pre-processing, we use VADER to do the sentiment analysis. We retrieve the compound score, and classify tweets into different polarities like positive/negative/neutral.
+After pre-processing, we use VADER sentiment intensity analyzer to do the sentiment analysis. We get sentiment score of each tweet, and retrieve the compound score. Then we classify tweets into different polarities like positive/negative/neutral according to the typical thresholds.
 
-At last, we compute the average sentiment score for each politician. 
+At last, we loop over all the politicians and compute the average sentiment score for each politician. 
+All the sentiment scores, polarities, and average score of each politician are stored in the database.
 
 
 
