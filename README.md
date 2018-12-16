@@ -45,7 +45,7 @@ pip install gensim
 ## Running the app
 
 1. Clone or download the repository files.
-2. [Download the database](https://drive.google.com/file/d/1Vdqxq78bhuTHp7plzsb8S6LgQu6k2vfP/view?usp=sharing) required to run the app.
+2. [Download the database](https://drive.google.com/file/d/1du9vzxirOis5uVF-34k4JcQneT8NgYrr/view?usp=sharing) required to run the app.
 3. Navigate to the project directory **politician-sentiment-analysis** and run the following command to activate the virtual environment.
 
 ```bash
