@@ -8,6 +8,8 @@ In this project we extract meaningful topics from a corpus of tweets for US poli
 
 **This project requires Python 3.6 to run.**
 
+**The project used [this dataset available on data.world](https://data.world/bkey/politician-tweets)**
+
 ## Required Python Frameworks
 
 * [Django](https://www.djangoproject.com/)

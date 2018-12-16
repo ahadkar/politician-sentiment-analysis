@@ -4,6 +4,8 @@ import csv, sqlite3, time
 
 db_filename = "db.sqlite3"
 
+# Loads all the tweets from a csv file in a db.sqlite3 database.
+
 
 def parse(filename):    
 

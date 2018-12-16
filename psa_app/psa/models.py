@@ -6,8 +6,11 @@ from django.db.models import Max
 
 # Create your models here.
 
-
 class Politician(models.Model):
+
+	'''
+	Main model for Politician
+	'''
 
 	twitter_id = models.BigIntegerField(default=0)
 	screen_name = models.CharField(max_length=1000)
@@ -51,7 +54,11 @@ class Politician(models.Model):
 
 
 class Tweet(models.Model):
-	
+
+	'''
+	Main model for Tweet
+	'''
+
 	tweet_id = models.BigIntegerField(default=0)
 	user_id = models.BigIntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=False, blank=True)
@@ -95,6 +102,10 @@ class Tweet(models.Model):
 
 class Topics(models.Model):
 
+	'''
+	Model for dataset level topics
+	'''
+
 	topics = models.CharField(max_length=100000, default='')
 	topic_id = models.IntegerField(default=0)
 
@@ -114,6 +125,10 @@ class Topics(models.Model):
 
 class TweetTopic(models.Model):
 
+	'''
+	Model for Tweet level topics
+	'''
+
 	topic_id = models.IntegerField(default=0)
 	topic_coverage = models.FloatField(default=0.0)
 	tweet_id = models.BigIntegerField(default=0)
@@ -121,6 +136,10 @@ class TweetTopic(models.Model):
 
 
 class Stats(models.Model):
+
+	'''
+	Model for Stats gathered from dataset
+	'''
 
 	positive_tweet_count = models.IntegerField(default=0)
 	negative_tweet_count = models.IntegerField(default=0)

@@ -7,8 +7,8 @@ from . import views
 
 urlpatterns = [
     url(r'^about/$', views.AboutPageView.as_view()),
-    url(r'tweets', views.pol_tweets, name='tweets'),
-    url(r'^', views.politician_list, name='politician_list'),
+    url(r'tweets', views.pol_tweets, name='tweets'),            # Tweet page URL config
+    url(r'^', views.politician_list, name='politician_list'),   # Politician page URL config
 ]
 
 #path('<str:screen_name>/', views.pol_tweets, name='tweets'),
