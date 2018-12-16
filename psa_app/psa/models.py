@@ -63,7 +63,7 @@ class Tweet(models.Model):
 	in_reply_to_status_id = models.BigIntegerField(default=0)
 	sentiment_score = models.FloatField(default=0.0)
 	sentiment_polarity = models.CharField(max_length=100, default='neutral')
-
+	topics = models.CharField(max_length=100000, default='unknown')
 
 	def polarity(self):
 
@@ -78,7 +78,28 @@ class Tweet(models.Model):
 
 		return "Neutral"
 
-  
+
+class Topics(models.Model):
+
+	topics = models.CharField(max_length=100000, default='')
+	topic_id = models.IntegerField(default=0)
+
+	def topic_distribution(self):
+		split_topics = self.topics.split(" + ")
+
+		for sp_topic in split_topics:
+			sp_topic.replace("\"", "")
+			sp_topic.replace("*", "-")
+
+
+class TweetTopic(models.Model):
+
+	topic_id = models.IntegerField(default=0)
+	topic_coverage = models.FloatField(default=0.0)
+	tweet_id = models.BigIntegerField(default=0)
+	user_id = models.BigIntegerField(default=0)
+
+
 class Stats(models.Model):
 
 	positive_tweet_count = models.IntegerField(default=0)
