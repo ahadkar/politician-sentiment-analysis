@@ -288,6 +288,29 @@
                 font-weight: 300;
             }
 
+            .topic-style {
+                margin-top: 5px;
+                margin-right: 10px;
+                text-align: center;
+                font-weight: 500;
+                font-size: 10px;
+            }
+
+            table#topics {
+                padding: 10px 10px 20px 0px;
+                margin-left: 20px;
+            }
+
+            table#topics th {
+                font-weight: 500;
+            }
+
+            .topic-grid-container {
+                display: grid;
+                grid-template-columns: auto auto;
+                padding-top: 10px;
+            }
+
         </style>
     </head>
     <body>
@@ -337,6 +360,91 @@
 
                 <hr>
 
+                <table id="topics">
+                    <thead>
+                        <tr>
+                            <th>Topic Distribution 1</th>
+                            <th style="padding-left: 20px">Topic Distribution 2</th>
+                            <th style="padding-left: 20px">Topic Distribution 3</th>
+                            <th style="padding-left: 20px">Topic Distribution 4</th>
+                            <th style="padding-left: 20px">Topic Distribution 5</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="topic-grid-container">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="topic-grid-container" style="margin-left: 20px">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="topic-grid-container" style="margin-left: 20px">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="topic-grid-container" style="margin-left: 20px">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="topic-grid-container" style="margin-left: 20px">
+                                    <div class="tag-style topic-style">
+                                        Item 1
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 2 long
+                                    </div>
+                                    <div class="tag-style topic-style">
+                                        Item 3
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <hr>
+
                 <div class="sort-grid-container">
                     <div class="sort-title">
                         Order By:
@@ -367,16 +475,16 @@
                             <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=sentiment_score">Most Negative</a>
                         {% endif %}
 
-                        {% if sort_order == 'favorite_count' %}
-                            <a class="active">Favorite Count</a>
+                        {% if sort_order == '-favorite_count' %}
+                            <a class="active">Top Favorite</a>
                         {% else %}
-                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=favorite_count">Favorite Count</a>
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=-favorite_count">Top Favorites</a>
                         {% endif %}
 
-                        {% if sort_order == 'retweet_count' %}
-                            <a class="active">Retweets</a>
+                        {% if sort_order == '-retweet_count' %}
+                            <a class="active">Top Retweets</a>
                         {% else %}
-                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=retweet_count">Retweets</a>
+                            <a class="disabled" href="{% url 'tweets' %}+?screen_name={{ politician.screen_name }}&page={{ tweets.number }}&sort_order=-retweet_count">Top Retweets</a>
                         {% endif %}
 
                     </div>
@@ -446,7 +554,7 @@
                         </div>
 
                         <div class="tweet-subtitle-style">
-                            {{ tweet.created_at }}
+                            {{ tweet.created_at }} • {{ tweet.retweet_count }} Retweets • {{ tweet.favorite_count }} Favorites
                         </div>
 
                     </div>

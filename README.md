@@ -6,7 +6,7 @@ This is a project for UIUC CS410 Text Retrieval and Analysis class.
 
 In this project we extract meaningful topics from a corpus of tweets for US politicians to create topic model. Futher we analyze the topic coverage for each politician's corpus of tweets. The tweets are then analyzed for positive/ negative/ neutral sentiment.
 
-**This project requires Python3 to run.**
+**This project requires Python 3.6 to run.**
 
 ## Required Python Frameworks
 
@@ -20,6 +20,26 @@ pip install django
 pip install virtualenv
 ```
 
+* [Spacy](https://spacy.io/)
+```bash
+pip install spacy
+```
+
+* [NLTK](https://www.nltk.org/index.html)
+```bash
+pip install nltk
+```
+
+* [Vader Sentiment](https://github.com/cjhutto/vaderSentiment)
+```bash
+pip install vaderSentiment
+```
+
+* [Gensim](https://radimrehurek.com/gensim/install.html)
+```bash
+pip install gensim
+```
+
 ## Running the app
 
 1. Clone or download the repository files.
@@ -30,13 +50,18 @@ pip install virtualenv
 source env/bin/activate
 ```
 
+*Note: Windows users should activate the environment by running:*
+```bash
+source env/scripts/activate
+```
+
 4. You will see the command prompt with the environment name **env**.
 
 ```bash
 env
 ```
 
-5. Use ```cd psa_app``` to navigate to the psa_app sub directory.
+5. Use ```cd psa_app``` to navigate to the *psa_app* sub directory.
 
 6. Next, enter the following command to start the runserver for the environment.
 
@@ -46,7 +71,7 @@ python manage.py runserver
 
 7. On a successful build the command prompt will print:
 
-```bash
+```
 System check identified no issues (0 silenced).
 November 21, 2018 - 22:03:33
 Django version 2.1.3, using settings 'psa_app.settings'
