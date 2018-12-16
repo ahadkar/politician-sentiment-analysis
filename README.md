@@ -67,7 +67,11 @@ In the pre-processing step, we first clean the tweets, including:
 3. remove URLs
 4. remove the hash # sign
 
-Then we tokenize the tweets, remove stopwords, and stem the words.
+Then we use TweetTokenizer from nltk.tokenize to tokenize the tweets.
+We use stopwords from nltk.corpus to remove the stop words.
+We also stem words using WordNetLemmatizer from nltk.stem.wordnet.
+
+An optimization: At first we used Porter stemmer. But it stems word too much that VADER analyzer cannot recognize the word. For Example, it stems "happy" to "happi", and VADER gives 0 score for this word. It means it is neutral, which apparently is not accurate. After some research, we choose WordNet Lemmatizer as the stemmer, and it performed much better.
 
 After pre-processing, we use VADER to do the sentiment analysis. We retrieve the compound score, and classify tweets into different polarities like positive/negative/neutral.
 
