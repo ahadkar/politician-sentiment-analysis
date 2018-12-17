@@ -10,10 +10,19 @@ In this project we extract meaningful topics from a corpus of tweets for US poli
 
 **The project used [this dataset available on data.world](https://data.world/bkey/politician-tweets)**
 
-**Contribution of Each Team Member**
-* Aditya:
-* Yujia:
-* Qian: Researched the appropriate toolkit of sentiment analysis. Implemented the sentiment analysis for each tweet and politician. Wrote the two files in sentiment directory: tweet_sentiment.py, politician_average.py and relative documentations.
+##Contribution of Each Team Member
+
+###Aditya Hadkar
+Setup the code base in Django for development. Designed and developed the web pages and backend to display the politicians, tweets, and analytics. Worked with Yujia to setup the code for topic modeling and save the results to the database.
+
+###Qian Ke 
+Researched the appropriate toolkit of sentiment analysis. Implemented the sentiment analysis for each tweet and politician. Wrote the two files in sentiment directory: tweet_sentiment.py, politician_average.py and relative documentations.
+
+###Yujia Jin
+
+
+## Required Database
+The database included in the repository is a placeholder. [Download the database](https://drive.google.com/file/d/1du9vzxirOis5uVF-34k4JcQneT8NgYrr/view?usp=sharing) and replace the one in the repository.
 
 ## Required Python Frameworks
 
@@ -32,6 +41,11 @@ pip install virtualenv
 pip install spacy
 ```
 
+* [Spacy English Model](https://spacy.io/usage/models)
+```bash
+python -m spacy download en
+```
+
 * [NLTK](https://www.nltk.org/index.html)
 ```bash
 pip install nltk
@@ -47,7 +61,7 @@ pip install vaderSentiment
 pip install gensim
 ```
 
-## Running the app
+## Installing and Running the app
 
 1. Clone or download the repository files.
 2. [Download the database](https://drive.google.com/file/d/1du9vzxirOis5uVF-34k4JcQneT8NgYrr/view?usp=sharing) required to run the app.
