@@ -152,6 +152,9 @@ Then an updated database with all the sentiment information is available.
 
 ## Statistics
 
-We maintain the statistics for the app using the ```stats``` class. The class is used in the ```tweet_analyzer.py``` file which runs independently inside the virtual environment.
+We maintain the statistics for the app using the ```stats``` class. The class is used in the ```psa_app/psa/tweet_analyzer.py``` file which runs independently inside the virtual environment.
 
-To generate the statistics for the project uncomment ```tweet_analyzer.analyze_stats()``` call in the ```politician_list``` view renderer in ```views.py```.
+To generate the statistics for the project 
+
+1. Uncomment ```tweet_analyzer.analyze_stats()``` call in the ```politician_list``` view renderer in ```views.py```.
+2. Start debugging by going to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in a browser window.
