@@ -10,6 +10,11 @@ In this project we extract meaningful topics from a corpus of tweets for US poli
 
 **The project used [this dataset available on data.world](https://data.world/bkey/politician-tweets)**
 
+**Contribution of Each Team Member**
+* Aditya:
+* Yujia:
+* Qian: Researched the appropriate toolkit of sentiment analysis. Implemented the sentiment analysis for each tweet and politician. Wrote the two files in sentiment directory: tweet_sentiment.py, politician_average.py and relative documentations.
+
 ## Required Python Frameworks
 
 * [Django](https://www.djangoproject.com/)
@@ -83,7 +88,7 @@ Quit the server with CONTROL-C.
 8. Finally, start the development server by going to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
 
 
-## Sentiment Analysis
+## Sentiment Analysis Implementation
 
 In our project, we use [VADER](https://github.com/cjhutto/vaderSentiment) to perform the sentiment analysis. VADER (Valence Aware Dictionary and Sentiment Reasoner) is a lexicon and rule-based sentiment analysis tool. It is specifically attuned to sentiments expressed in social media.
 
