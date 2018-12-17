@@ -10,6 +10,7 @@ In this project we extract meaningful topics from a corpus of tweets for US poli
 
 **The project used [this dataset available on data.world](https://data.world/bkey/politician-tweets)**
 
+
 ##Contribution of Each Team Member
 
 ###Aditya Hadkar
@@ -23,6 +24,7 @@ Researched the appropriate toolkit of sentiment analysis. Implemented the sentim
 
 ## Required Database
 The database included in the repository is a placeholder. [Download the database](https://drive.google.com/file/d/1du9vzxirOis5uVF-34k4JcQneT8NgYrr/view?usp=sharing) and replace the one in the repository.
+
 
 ## Required Python Frameworks
 
@@ -60,6 +62,7 @@ pip install vaderSentiment
 ```bash
 pip install gensim
 ```
+
 
 ## Installing and Running the app
 
