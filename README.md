@@ -13,13 +13,17 @@ In this project we extract meaningful topics from a corpus of tweets for US poli
 
 ##Contribution of Each Team Member
 
+
 ###Aditya Hadkar
 Setup the code base in Django for development. Designed and developed the web pages and backend to display the politicians, tweets, and analytics. Worked with Yujia to setup the code for topic modeling and save the results to the database.
+
 
 ###Qian Ke 
 Researched the appropriate toolkit of sentiment analysis. Implemented the sentiment analysis for each tweet and politician. Wrote the two files in sentiment directory: tweet_sentiment.py, politician_average.py and relative documentations.
 
+
 ###Yujia Jin
+
 
 
 ## Required Database
