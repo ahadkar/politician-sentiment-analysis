@@ -461,6 +461,10 @@
 
                 <hr>
 
+                <div style="margin-left: 20px; margin-bottom: 10px; font-weight: 400">
+                    {{ tweets.paginator.num_pages }} Pages • 30 per page
+                </div>
+
                 {% if tweets.has_other_pages %}
                     <div class="pagination" style="padding-left: 20px;">
 
@@ -538,5 +542,39 @@
                 </div>
             {% endfor %}
         </div>
+
+        <hr>
+
+        <div style="margin-left: 20px; margin-bottom: 10px; font-weight: 400; font-family: Roboto, sans-serif; color: #3b5998;">
+            {{ tweets.paginator.num_pages }} Pages • 30 per page
+        </div>
+
+        {% if tweets.has_other_pages %}
+            <div class="pagination" style="padding-left: 20px; padding-bottom: 10px">
+
+                {% if tweets.has_previous %}
+                    <a href="{% url 'tweets' %}?screen_name={{ politician.screen_name }}&page={{ tweets.previous_page_number }}&sort_order={{ sort_order }}">Previous</a>
+                {% else %}
+                    <a class="disabled">Previous</a>
+                {% endif %}
+
+                {% for i in tweets.paginator.page_range %}
+                    {% if tweets.number == i %}
+                        <a href="{% url 'tweets' %}?screen_name={{ politician.screen_name }}&page={{ i }}&sort_order={{ sort_order }}" class="active">{{ i }}</a>
+                    {% else %}
+                        <a href="{% url 'tweets' %}?screen_name={{ politician.screen_name }}&page={{ i }}&sort_order={{ sort_order }}">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if tweets.has_next %}
+                    <a href="{% url 'tweets' %}?screen_name={{ politician.screen_name }}&page={{ tweets.next_page_number }}&sort_order={{ sort_order }}">Next</a>
+                {% else %}
+                    <a class="disabled">Next</a>
+                {% endif %}
+
+            </div>
+        {% endif %}
+
+        <hr>
     </body>
 </html>

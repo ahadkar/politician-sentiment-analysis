@@ -336,7 +336,12 @@ Created by Aditya Hadkar
 
                 <hr>
 
+                <div style="margin-left: 20px; margin-bottom: 10px; font-weight: 400">
+                    {{ pol_list.paginator.num_pages }} Pages • 30 per page
+                </div>
+
                 {% if pol_list.has_other_pages %}
+
                     <div class="pagination" style="padding-left: 20px">
 
                         {% if pol_list.has_previous %}
@@ -406,6 +411,41 @@ Created by Aditya Hadkar
                     </div>
                 {% endfor %}
             </div>
+
+            <hr>
+
+            <div style="margin-left: 20px; margin-bottom: 10px; font-weight: 400; font-family: Roboto, sans-serif; color: #3b5998;">
+                {{ pol_list.paginator.num_pages }} Pages • 30 per page
+            </div>
+
+            {% if pol_list.has_other_pages %}
+
+                <div class="pagination" style="padding-left: 20px; padding-bottom: 10px">
+
+                    {% if pol_list.has_previous %}
+                        <a href="?page={{ pol_list.previous_page_number }}">Previous</a>
+                    {% else %}
+                        <a class="disabled">Previous</a>
+                    {% endif %}
+
+                    {% for i in pol_list.paginator.page_range %}
+                        {% if pol_list.number == i %}
+                            <a href="?page={{ i }}" class="active">{{ i }}</a>
+                        {% else %}
+                            <a href="?page={{ i }}">{{ i }}</a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if pol_list.has_next %}
+                        <a href="?page={{ pol_list.next_page_number }}">Next</a>
+                    {% else %}
+                        <a class="disabled">Next</a>
+                    {% endif %}
+
+                </div>
+            {% endif %}
+
+            <hr>
         </div>
 
     </body>

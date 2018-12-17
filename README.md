@@ -147,3 +147,11 @@ pip install vaderSentiment
 4. Run politician_average.py
 
 Then an updated database with all the sentiment information is available.
+
+## Topic Modeling with LDA Gensim
+
+## Statistics
+
+We maintain the statistics for the app using the ```stats``` class. The class is used in the ```tweet_analyzer.py``` file which runs independently inside the virtual environment.
+
+To generate the statistics for the project uncomment ```tweet_analyzer.analyze_stats()``` call in the ```politician_list``` view renderer in ```views.py```.
