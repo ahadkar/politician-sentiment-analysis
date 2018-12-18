@@ -23,7 +23,7 @@ Researched the appropriate toolkit of sentiment analysis. Implemented the sentim
 
 
 ### Yujia Jin
-
+Project coordiantor, researched and wrote the documentations for topic modeling toolkits, worked with Aditya to implement the toolkit for tweets database.
 
 
 ## Required Database
@@ -149,6 +149,21 @@ pip install vaderSentiment
 Then an updated database with all the sentiment information is available.
 
 ## Topic Modeling with LDA Gensim
+We use Gensim (https://pypi.org/project/gensim/) to implement the Latent Dirichlet Allocation (LDA) algorithm,
+Gensim is a Python library for topic modelling, document indexing and similarity retrieval with large corpora. 
+This software depends on NumPy and Scipy, two Python packages for scientific computing. You must have them installed prior to installing gensim.
+
+The simple way to install gensim is:
+pip install gensim
+
+To install Numpy and and Scipy, run:
+pip install numpy
+pip install scipy
+
+In order to perform topic modeling, we need create lists for tokens from each tweets, then we created a dictionary and corpus of bag-of words, and saved them for future use. Next step is create a LDA model with gensim, pass the parameters to specify the number of topics we want to extract. After we generated the topic, we used get_ducument_topics function from gensim to get a topic distribution of the data.
+
+To perform topic modeling:
+navigate to psa_app/psa directory, and Run tweet_analyzer.py
 
 ## Statistics
 
